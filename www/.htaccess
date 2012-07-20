@@ -1,0 +1,23 @@
+AddDefaultCharset utf-8
+#php_flag magic_quotes_gpc Off
+#php_flag magic_quotes_runtime Off
+#php_flag register_globals Off
+
+Options -Indexes
+
+ErrorDocument 401 /401.html
+ErrorDocument 403 /403.html
+ErrorDocument 404 /404.html
+
+# php_value error_reporting 2047
+# php_value error_log "Z:/home/irbis/www/log/error.log"
+# php_flag log_errors on
+# php_flag display_errors off
+
+RewriteEngine    on
+
+RewriteRule ^admin/(.*)$ admin/index.php?route=$1 [L,QSA]
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
